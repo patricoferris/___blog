@@ -30,6 +30,11 @@ At its core, Rory is very similar to [Canopy](https://github.com/Engil/Canopy) i
 
 As mentioned, data for the client is exposed with a Graphql endpoint. Using the Irmin CLI tool from the blog repository a Graphql schema can be generated.
 
+```bash
+$ irmin graphql --port 8080
+$ npx get-graphql-schema http://localhost:8080/graphql -j > graphql_schema.json 
+```
+
 ## Client
 
 ### ReasonReact
