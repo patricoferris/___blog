@@ -28,7 +28,7 @@ At its core, Rory is very similar to [Canopy](https://github.com/Engil/Canopy) i
 
 ### Graphql
 
-As mentioned, data for the client is exposed with a Graphql endpoint.
+As mentioned, data for the client is exposed with a Graphql endpoint. Using the Irmin CLI tool from the blog repository a Graphql schema can be generated.
 
 ## Client
 
@@ -39,6 +39,24 @@ As mentioned, data for the client is exposed with a Graphql endpoint.
 ### Apollo-Graphql
 
 [Apollo-Graphql](https://www.apollographql.com/) is a platform for building Graphql-based web apps - Rory uses the Apollo Client to wrap components and the [React hooks](https://github.com/reasonml-community/reason-apollo-hooks) to fetch data in a smart way with out-of-the-box caching. 
+
+Fetching data can be "type checked" using the schema and the [graphql-ppx](https://github.com/reasonml-community/graphql-ppx) - the blog page for example asks for: 
+
+```ocaml
+module UserQuery = [%graphql {|
+  query UserQuery {
+    branch(name: "trunk") {
+      tree {
+        get_tree(key: "blogs") {
+          list_contents_recursively {
+            key
+          }
+        }
+      }
+    }
+  }
+|}];
+```
 
 ## Content Management 
 
