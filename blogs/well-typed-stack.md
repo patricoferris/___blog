@@ -26,6 +26,8 @@ Rory uses MirageOS as deployment target. This means the web application (client 
 
 At its core, Rory is very similar to [Canopy](https://github.com/Engil/Canopy) in that it uses Git-based stores for holding and modifying data. To do this in OCaml it uses [Irmin](https://irmin.io/) to create an in-memory data-store that is syncable and modifiable. What's more, Irmin comes with some useful tools to expose that data via a Graphql endpoint.
 
+For now it pulls the blog content to a `trunk` branch and exposes the modified data to the `data` branch. Unfortunately, [due to an ocaml-git issue](https://github.com/mirage/ocaml-git/issues/364) syncing doesn't quite work yet. In the meantime the live site pins [this version](https://github.com/patricoferris/irmin/tree/mirage-site) of ocaml-git to always pull everything to a fresh repo. 
+
 ### Graphql
 
 As mentioned, data for the client is exposed with a Graphql endpoint. Using the Irmin CLI tool from the blog repository a Graphql schema can be generated.
