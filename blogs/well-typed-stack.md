@@ -28,6 +28,8 @@ At its core, Rory is very similar to [Canopy](https://github.com/Engil/Canopy) i
 
 For now it pulls the blog content to a `trunk` branch and exposes the modified data to the `data` branch. Unfortunately, [due to an ocaml-git issue](https://github.com/mirage/ocaml-git/issues/364) syncing doesn't quite work yet. In the meantime the live site pins [this version](https://github.com/patricoferris/irmin/tree/mirage-site) of ocaml-git to always pull everything to a fresh repo. 
 
+The `sync` function then just carries around with it the git store type which has a mutable store. On syncs we either produce a fresh store or assign the new store to the old one... not pretty, but it works. 
+
 ### Graphql
 
 As mentioned, data for the client is exposed with a Graphql endpoint. Using the Irmin CLI tool from the blog repository a Graphql schema can be generated.
