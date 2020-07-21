@@ -72,3 +72,5 @@ module UserQuery = [%graphql {|
 The blog content is of course stored as a git repository on Github. To make it easier to write, draft and publish blog posts Rory uses [NetlifyCMS](https://www.netlifycms.org/) to... content manage. On top of this, a nifty Github Action in the blog repo set to fire on a push event will hit the sync endpoint of Rory and causes the data to reload without a rebuild!
 
 Rory is still very much a work-in-progress but you can check it out here: *coming soon*
+
+![NetlifyCMS](/static/images/netlifycms.png)
