@@ -2,7 +2,7 @@
 authors:
   - Patrick Ferris
 title: Well Typed Stack
-updated: July 31, 2020 6:08 PM
+updated: July 31, 2020 6:31 PM
 tags:
   - mirage
   - irmin
