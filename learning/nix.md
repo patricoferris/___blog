@@ -27,9 +27,11 @@ Notes on [Nix](https://nixos.org/) -- a package manager for Linux and Unix-like 
 
  The nix store contains the packages (usually located at `/nix/store`). The actual directory for a package is unique as it is identified by a hash of the build dependency graph of that package. This is where the afore mentioned immutability comes from.
 
+ While the actual packages live in the Nix store, the user accesses them using **symlinks**.
+
 > Nix Store operations are atomic
 
- Consider updating a package -- Nix doesn't destructively touch a package which currently works and is being depended on by another package.
+ Consider updating a package -- Nix doesn't destructively touch a package which currently works and is being depended on by another package. During an upgrade fresh files are generated and built and then the symlinks are updated. If something fails, the symlinks can be reverted to where they used to point as that version/variant of the package still exists.
 
  Uninstalling a package doesn't delete it -- to do that you have to run the Nix garbage collector. 
 

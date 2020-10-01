@@ -24,10 +24,11 @@
 <p>What this provides is a simpler and easier to reason about model for package management. Similarly without this idea of mutability implementing the rollback mechanisms for Nix is simple.</p>
 <h3>Nix Store</h3>
 <p>The nix store contains the packages (usually located at <code>/nix/store</code>). The actual directory for a package is unique as it is identified by a hash of the build dependency graph of that package. This is where the afore mentioned immutability comes from.</p>
+<p>While the actual packages live in the Nix store, the user accesses them using <strong>symlinks</strong>.</p>
 <blockquote>
 <p>Nix Store operations are atomic</p>
 </blockquote>
-<p>Consider updating a package -- Nix doesn't destructively touch a package which currently works and is being depended on by another package.</p>
+<p>Consider updating a package -- Nix doesn't destructively touch a package which currently works and is being depended on by another package. During an upgrade fresh files are generated and built and then the symlinks are updated. If something fails, the symlinks can be reverted to where they used to point as that version/variant of the package still exists.</p>
 <p>Uninstalling a package doesn't delete it -- to do that you have to run the Nix garbage collector.</p>
 <h3>Package-specific Vs. Global Locations</h3>
 <p>Nix stores dependencies in a package-specific way not globally (like opam's default global switches). A direct-consequence of this is that the chances for missing dependencies is greatly reduced. Anecdotally, I have pushed an OCaml project to Github many times forgetting to update the package list because I already had it globally installed. CI thankfully catches this, but Nix's model means it would be likely caught before!</p>
