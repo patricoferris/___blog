@@ -14,7 +14,7 @@ end
 module Learning = struct
   include Collection.Make (M)
 
-  let to_html (t : t) = 
+  let to_html (t : t) =  
     let body = Omd.to_html (body_md t) in
     let doc title body =
       [%html {| 
@@ -35,7 +35,7 @@ module Learning = struct
     let wrapper =
       [%html "<div class='content'>" [ Html.Unsafe.data body ] "</div>"]
     in
-    Tyxml.Html.pp ~indent:true () Format.str_formatter (doc "Learning" wrapper);
+    Tyxml.Html.pp ~indent:true () Format.str_formatter (doc t.meta.title wrapper);
     Format.flush_str_formatter ()
 end
 
