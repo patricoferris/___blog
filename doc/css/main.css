@@ -1,0 +1,32 @@
+html, body {
+  line-height: 1.2em;
+  font-size: 1.05em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+pre {
+  color: white;
+  background-color: black;
+}
+
+p {
+  font-weight: 500;
+}
+
+p code, li code {
+  background-color: rgb(241, 186, 65);
+  padding: 2px;
+  border-radius: 2px;
+}
+
+h1, h2 {
+  border-bottom: 1px solid gray;
+  padding-bottom: .67em;
+}
+
+.content {
+  width: 60%;
+  padding: 0 20%;
+  max-width: 1100px;
+  margin: auto;
+}

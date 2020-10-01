@@ -1,0 +1,5 @@
+(executable
+ (name build)
+ (libraries omd tyxml rory)
+ (preprocess
+  (pps ppx_deriving_yaml tyxml-ppx)))
