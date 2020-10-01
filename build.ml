@@ -41,4 +41,4 @@ end
 
 module B = Build.Make (Learning)
 
-let () = print_endline (Sys.getcwd ()); B.build ~src_dir:"learning" ~dest_dir:"doc"
+let () = print_endline (Sys.getcwd ()); B.build ~src_dir:"learning" ~dest_dir:"docs"
