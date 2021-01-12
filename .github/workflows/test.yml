@@ -1,0 +1,30 @@
+name: Static Site Generation Test
+on: [ pull_request ]
+jobs:
+  test:
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        ocaml-version: [4.11.1]
+    runs-on: ${{ matrix.operating-system }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: avsm/setup-ocaml@v1
+      with:
+        ocaml-version: ${{ matrix.ocaml-version }}
+    - name: Pinning Package
+      run: opam pin add -yn pf-blog.dev './'
+    - name: Packages
+      run: opam depext -yt pf-blog.dev
+    - name: Dependencies
+      run: opam install -t -y . --deps-only
+    - name: Build
+      run: opam exec -- dune build --profile release
+    - name: Static Site Generation
+      run: _build/default/src/main.exe 
+    - name: Deploy to GH Pages 🚀
+      uses: JamesIves/github-pages-deploy-action@3.5.7
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: site-test 
+        FOLDER: content
