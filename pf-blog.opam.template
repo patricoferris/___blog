@@ -1,0 +1,5 @@
+pin-depends: [
+  [ "sesame.dev" "git+https://github.com/patricoferris/sesame" ]
+  [ "omd.dev" "git+https://github.com/ocaml/omd" ]
+  [ "jekyll-format.dev" "git+https://github.com/avsm/jekyll-format"] 
+]

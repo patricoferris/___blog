@@ -1,0 +1,6 @@
+(executable
+ (name main)
+ (public_name pf-blog)
+ (preprocess
+  (pps ppx_deriving_yaml tyxml-ppx))
+ (libraries sesame bos tyxml css-parser))
