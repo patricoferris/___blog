@@ -1,7 +1,7 @@
 ---
 title: A Short Introduction to RISC-V 
 description: A long-form post about high-level RISC-V concepts along with technical tibits to keep you curious.
-date: 2020-12-29
+date: 2021-01-13
 authors: 
   - Patrick Ferris
 topics:
@@ -21,10 +21,14 @@ A timeless quote from the great [David Wheeler](https://en.wikipedia.org/wiki/Da
 
 > All problems in computer science can be solved by another level of indirection : [citation](https://www2.dmst.aueb.gr/dds/pubs/inbook/beautiful_code/html/Spi07g.html)
 
-The extent to which this idea permeates all areas of problem-solving particularly in computer science is hard to express. The fundamental principle is abstraction. Whether that be in the [various layers of the OSI network model](), [declarative languages for performing database queries](https://www.infoworld.com/article/3219795/what-is-sql-the-lingua-franca-of-data-analysis.html) or in this case telling a computer what to do.
+The extent to which this idea permeates all areas of problem-solving particularly in computer science is hard to express. The fundamental principle is abstraction. Whether that be in the [various layers of the OSI network model](https://en.wikipedia.org/wiki/OSI_model), [declarative languages for performing database queries](https://www.infoworld.com/article/3219795/what-is-sql-the-lingua-franca-of-data-analysis.html) or in this case telling a computer what to do.
 
-An ISA is bridge between hardware and software. It provides a framework and philosophy for designing hardware and compiling languages. ISAs are divided into two fairly over-simplified but useful camps: reduced (RISC) and complex (CISC) instruction set computers. [x86]() would be the classic CISC architecture known for it's [enormous number of instructions]() and [licensing](). 
-RISC-V in constrast, is a free and open-source ISA specification. 
+An ISA is bridge between hardware and software. It provides a framework and philosophy for designing hardware and compiling languages. ISAs are divided into two fairly over-simplified but useful camps: reduced (RISC) and complex (CISC) instruction set computers. [x86](https://en.wikipedia.org/wiki/X86) would be the classic CISC architecture known for its [enormous number of instructions](https://fgiesen.wordpress.com/2016/08/25/how-many-x86-instructions-are-there/#:~:text=To%20not%20leave%20you%20hanging,too%2C%20by%20the%20way) and [licensing](https://jolt.law.harvard.edu/digest/intel-and-the-x86-architecture-a-legal-perspective). 
+RISC-V in contrast, is a free and open-source ISA specification. You are free to take it and do what you will with it.
+
+## A Broad Overview
+
+Before diving into interesting characteristics and design decisions, it's useful to 
 
 ## Simplicity
 
@@ -34,7 +38,7 @@ A RISC architecture does not imply simplicity. It is quite possible to bake-in c
 
 The instruction encoding format uses just six types and all are 32-bits wide, this can vastly reduce the complexity of the decoding logic in a CPU. Moreover, the register locations (i.e. the bit ranges where the register values are kept within the instruction) are the same across the formats. For performance, this allows registers to be accessed before decoding even begins which can help reduce the critical time path. 
 
-<div style="text-align: center;">
+<div class="diagram-container">
   <img class="diagram" style="width: 100%" alt="An example of location-sharing between formats" src="./diagrams/instr.svg" />
   <p><em>Figure: A diagram indicating the location-sharing between R-type and I-type instruction formats.</em></p>
 </div>

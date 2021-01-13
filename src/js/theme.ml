@@ -11,6 +11,8 @@ module Css = struct
 
   let off_white = "#fffff7"
 
+  let pink = "#ff14938c"
+
   let set_dark =
     css
       [
@@ -26,7 +28,7 @@ module Css = struct
         ("--invert", "0");
         ("--font-color", "#121212");
         ("--background-color", off_white);
-        ("--accent-color", "deeppink");
+        ("--accent-color", pink);
       ]
 end
 
@@ -45,3 +47,7 @@ module Store = struct
         Console.(warn [ str "Encountered an error"; Jv.Error.name m ]);
         default
 end
+
+let set_text el txt = El.set_children el [ El.txt' txt ]
+
+let txt_changer t b = if b then set_text t "light" else set_text t "dark"

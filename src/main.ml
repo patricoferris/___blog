@@ -26,14 +26,15 @@ module Comps = struct
 
   let content c = [%html "<div class='content'>" c "</div>"]
 
-  let title t = [%html "<h1>" [ Tyxml.Html.txt t ] "</h1>"]
+  let title t = [%html "<h1 class='h1-title'>" [ Tyxml.Html.txt t ] "</h1>"]
 
   let date p = [%html "<p class='date'>" [ Html.txt p ] "</p>"]
 
   let navbar =
     [%html
-      "<div class='nav'><a href='/'>@patricoferris</a><a href='#' id='toggle' \
-       class='btn'>toggle dark</a></div>"]
+      "<div class='nav'><a class='title' href='/'>home</a><a class='title' \
+       href='https://twitter.com/patricoferris'>@patricoferris</a><a href='#' \
+       id='toggle' class='title'>toggle dark</a></div>"]
 
   let reading lst =
     let mk_text t = [ Html.txt t ] in
@@ -72,8 +73,12 @@ module PostCollection = struct
   include Collection.Make (Post)
 
   let to_html (t : t) =
+    let open Tyxml in
     let toc = Transformer.Toc.toc (body_md t) in
     let html_toc = Transformer.Toc.to_html toc in
+    let align_center c =
+      [%html "<div style='text-align: center;'>" c "</div>"]
+    in
     let r =
       t.meta.reading
       |> List.map (fun (r : Post.reading) -> (r.name, r.description, r.url))
@@ -85,9 +90,16 @@ module PostCollection = struct
             Comps.navbar;
             Comps.content
             @@ [
+                 align_center
+                 @@ [
+                      Comps.title t.meta.title;
+                      Comps.date t.meta.date;
+                      Tyxml.(Html.p [ Html.em [ Html.txt t.meta.description ] ]);
+                      Tyxml.Html.br ();
+                      Tyxml.Html.hr ();
+                      Tyxml.Html.br ();
+                    ];
                  html_toc;
-                 Comps.title t.meta.title;
-                 Comps.date t.meta.date;
                  Tyxml.Html.Unsafe.data
                    (body_md t |> Transformer.Toc.transform |> Omd.to_html);
                  Comps.reading r;
@@ -112,7 +124,11 @@ module PostCollection = struct
               "</p></li>"])
         ts
     in
-    let body = [ Comps.navbar; Comps.content [ [%html "<ul>" ts "</ul>"] ] ] in
+    let body =
+      [
+        Comps.navbar; Comps.content [ [%html "<ul class='index'>" ts "</ul>"] ];
+      ]
+    in
     Comps.html ~lang:"en" ~css:"/main.css" ~title:"Main"
       ~description:"home page" ~body
 end
@@ -128,6 +144,7 @@ module PageCollection = struct
             Comps.navbar;
             Comps.content
             @@ [ Tyxml.Html.Unsafe.data (body_md t |> Omd.to_html) ];
+            Tyxml.Html.(p [ em [ txt ("Last built: " ^ Utils.get_time ()) ] ]);
           ];
       ]
     in
@@ -164,12 +181,12 @@ let copy_svgs () =
 let check_and_copy_styles f =
   match Bos.OS.File.read f with
   | Ok content -> (
-      ( try Css.Parser.parse_stylesheet content
-        with Css.Lexer.ParseError _ -> failwith "Broken CSS!" )
+      (try Css.Parser.parse_stylesheet content
+       with Css.Lexer.ParseError _ -> failwith "Broken CSS!")
       |> ignore;
       Files.output_file ~path:"public/main.css" ~content |> function
       | Ok _ -> ()
-      | Error (`Msg m) -> failwith m )
+      | Error (`Msg m) -> failwith m)
   | Error (`Msg m) -> failwith m
 
 let () =
