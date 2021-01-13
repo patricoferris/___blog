@@ -13,10 +13,21 @@
   <script src="/root.js"></script> 
                                         
   <div>
-   <div class="nav"><a href="/">@patricoferris</a>
-    <a href="#" id="toggle" class="btn">toggle dark</a>
+   <div class="nav"><a class="title" href="/">home</a>
+    <a class="title" href="https://twitter.com/patricoferris">@patricoferris
+    </a><a href="#" id="toggle" class="title">toggle dark</a>
    </div>
    <div class="content">
+    <div style="text-align: center;">
+     <h1 class="h1-title">A Short Introduction to RISC-V</h1>
+     <p class="date">2021-01-13</p>
+     <p>
+      <em>
+       A long-form post about high-level RISC-V concepts along with technical
+       tibits to keep you curious.
+      </em>
+     </p><br/><hr/><br/>
+    </div>
     <details><summary>Table of Contents</summary>
      <ul class="toc">
       <li>
@@ -25,6 +36,13 @@
          <ul class="toc">
           <li class="toc-li">
            <a class="toc-link toc-item-2" href="#abstraction">Abstraction</a>
+          </li>
+         </ul>
+         <ul class="toc">
+          <li class="toc-li">
+           <a class="toc-link toc-item-2" href="#a-broad-overview">
+            A Broad Overview
+           </a>
           </li>
          </ul>
          <ul class="toc">
@@ -91,22 +109,23 @@
        </ul>
       </li>
      </ul>
-    </details><h1>A Short Introduction to RISC-V</h1>
-    <p class="date">2020-12-29</p>
+    </details>
     <p>&quot;Keep it simple unless for good reason&quot; that's how Turing Award winning and vice chair of the board of directors of the RISC-V Foundation, <a href="https://en.wikipedia.org/wiki/David_Patterson_%28computer_scientist%29">David Patterson</a>, explained the underlying principles of the reduced instruction set computer (RISC) in <a href="https://www.youtube.com/watch?v=5NjGLyBx0wg">1985</a>. This short essay explores the fundamental characteristics of RISC-V, how it differs from more conventional instruction set architectures (ISA) and peppered throughout are interesting technical tibits about the design of RISC-V.</p>
 <h2 id="abstraction">Abstraction</h2>
 <p>A timeless quote from the great <a href="https://en.wikipedia.org/wiki/David_Wheeler_(computer_scientist)">David Wheeler</a> is often used again and again within the field of computer science.</p>
 <blockquote>
 <p>All problems in computer science can be solved by another level of indirection : <a href="https://www2.dmst.aueb.gr/dds/pubs/inbook/beautiful_code/html/Spi07g.html">citation</a></p>
 </blockquote>
-<p>The extent to which this idea permeates all areas of problem-solving particularly in computer science is hard to express. The fundamental principle is abstraction. Whether that be in the <a href="">various layers of the OSI network model</a>, <a href="https://www.infoworld.com/article/3219795/what-is-sql-the-lingua-franca-of-data-analysis.html">declarative languages for performing database queries</a> or in this case telling a computer what to do.</p>
-<p>An ISA is bridge between hardware and software. It provides a framework and philosophy for designing hardware and compiling languages. ISAs are divided into two fairly over-simplified but useful camps: reduced (RISC) and complex (CISC) instruction set computers. <a href="">x86</a> would be the classic CISC architecture known for it's <a href="">enormous number of instructions</a> and <a href="">licensing</a>.
-RISC-V in constrast, is a free and open-source ISA specification.</p>
+<p>The extent to which this idea permeates all areas of problem-solving particularly in computer science is hard to express. The fundamental principle is abstraction. Whether that be in the <a href="https://en.wikipedia.org/wiki/OSI_model">various layers of the OSI network model</a>, <a href="https://www.infoworld.com/article/3219795/what-is-sql-the-lingua-franca-of-data-analysis.html">declarative languages for performing database queries</a> or in this case telling a computer what to do.</p>
+<p>An ISA is bridge between hardware and software. It provides a framework and philosophy for designing hardware and compiling languages. ISAs are divided into two fairly over-simplified but useful camps: reduced (RISC) and complex (CISC) instruction set computers. <a href="https://en.wikipedia.org/wiki/X86">x86</a> would be the classic CISC architecture known for its <a href="https://fgiesen.wordpress.com/2016/08/25/how-many-x86-instructions-are-there/#:~:text=To%20not%20leave%20you%20hanging,too%2C%20by%20the%20way">enormous number of instructions</a> and <a href="https://jolt.law.harvard.edu/digest/intel-and-the-x86-architecture-a-legal-perspective">licensing</a>.
+RISC-V in contrast, is a free and open-source ISA specification. You are free to take it and do what you will with it.</p>
+<h2 id="a-broad-overview">A Broad Overview</h2>
+<p>Before diving into interesting characteristics and design decisions, it's useful to</p>
 <h2 id="simplicity">Simplicity</h2>
 <p>A RISC architecture does not imply simplicity. It is quite possible to bake-in complex behaviour into a seemingly reduced or simple specification. RISC-V opts to follow the principle &quot;keep it simple unless for good reason&quot;. This manifests itself in a number of ways.</p>
 <h3 id="fixed-width-and-specifier-location-sharing-formats">Fixed-width and specifier location-sharing formats</h3>
 <p>The instruction encoding format uses just six types and all are 32-bits wide, this can vastly reduce the complexity of the decoding logic in a CPU. Moreover, the register locations (i.e. the bit ranges where the register values are kept within the instruction) are the same across the formats. For performance, this allows registers to be accessed before decoding even begins which can help reduce the critical time path.</p>
-<div style="text-align: center;">
+<div class="diagram-container">
   <img class="diagram" style="width: 100%" alt="An example of location-sharing between formats" src="./diagrams/instr.svg" />
   <p><em>Figure: A diagram indicating the location-sharing between R-type and I-type instruction formats.</em></p>
 </div>

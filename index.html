@@ -11,8 +11,9 @@
   <script src="/root.js"></script> 
                                         
   <div>
-   <div class="nav"><a href="/">@patricoferris</a>
-    <a href="#" id="toggle" class="btn">toggle dark</a>
+   <div class="nav"><a class="title" href="/">home</a>
+    <a class="title" href="https://twitter.com/patricoferris">@patricoferris
+    </a><a href="#" id="toggle" class="title">toggle dark</a>
    </div>
    <div class="content">
     <h1>Patrick Ferris</h1>
@@ -25,10 +26,18 @@
 </ul>
 <h2>Posts</h2>
 <p>Slightly more formal and a little longer, be sure to have a look at the extra reading section for a collection of useful resources. <a href="/posts">Posts</a>.</p>
+<h2>Site Info</h2>
+<p>This website is a <a href="https://github.com/mirage/mirage">MirageOS</a> Unikernel deployed to Google Cloud (using the <em>virtio</em> backend, some <a href="https://github.com/solo5/solo5">Solo5</a> magic and a Github Action for continuous deployment). The <a href="https://github.com/patricoferris/___blog">content repo</a> uses a really simple <a href="https://github.com/patricoferris/sesame">static-site generator</a> that I wrote and pushes the built site to the <code>live</code> branch. The Unikernel then does a <code>git pull</code> using <a href="https://github.com/mirage/irmin">Irmin</a> from this branch to get the latests content. All of this is possible thanks to:</p>
+<ul>
+<li><a href="https://github.com/dinosaure/blog.x25519.net">@dinosaure's blog</a> for the Irmin parts.
+</li>
+<li><a href="https://github.com/sgrove/riseos">@sgrove's site</a> for the Google Cloud deployment idea.
+</li>
+</ul>
 <h2>Software</h2>
 <p><a href="https://github.com/patricoferris/ppx_deriving_yaml">ppx_deriving_yaml</a> -- an OCaml PPX deriver that can take your OCaml types and make Yaml ones (and back again).</p>
 
-   </div>
+   </div><p><em>Last built: 2021-01-13 23:32:58 +00:00</em></p>
   </div>
             
             
