@@ -26,8 +26,12 @@ jobs:
     - name: Static Site Generation
       run: _build/default/src/main.exe 
     - name: Deploy to Live Branch
-      uses: JamesIves/github-pages-deploy-action@3.5.7
+      uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: live 
         FOLDER: public
+    - name: Curl for sync
+      run: | 
+        sudo apt-get install curl --yes 
+        curl https://patricoferris.com/___sync
