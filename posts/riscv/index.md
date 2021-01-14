@@ -132,6 +132,12 @@ As a shameless plug, the curious reader might be interested in [my dissertation]
 
 RISC-V's simplicity, open-source ideology and modularity all combine in such a way to make it extremely useful in an academic setting. Not only for research (new CPU designs, custom extensions, tools etc.) but for undergraduates (like myself) where the smaller size and ability to look at many examples of RISC-V compatible hardware designed in Verilog makes it more accessible. 
 
+### Learn by doing
+
+[FemtoRV](https://github.com/BrunoLevy/learn-fpga/tree/master/FemtoRV) is a simple RISC-V CPU and teaching the basics of CPU design and FPGA synthesis by [Bruno Levy](https://twitter.com/BrunoLevy01). The repository takes you through the process of implementing this little CPU on a $40 FPGA, whilst learning practical skills because RISC-V is a industrial-strength ISA.
+
+You can also have a look at some [OCaml RISC-V Dockerfiles](https://github.com/patricoferris/ocaml-on-riscv) I wrote so you can cross-compile OCaml code to RISC-V and run it on the RISC-V ISA Simulator, [Spike](https://github.com/riscv/riscv-isa-sim).
+
 ## Conclusion
 
 The future is increasingly looking like one where RISC-V plays a major role. Perhaps not directly in large, consumer markets like laptops but certainly in the embedded space and within academia. RISC-V's extensibility and open license make it ideal for application specific hardware likes ASICs or FPGAs as it forms a solid based from which to customise and freely use. 
