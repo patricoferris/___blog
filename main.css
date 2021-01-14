@@ -1,3 +1,4 @@
+@import url('https://rsms.me/inter/inter.css');
 /* Basic Theme */
 body {
   color: var(--font-color);
@@ -5,8 +6,9 @@ body {
 }
 
 /* CSS */
-html, body {
-  font-family: "Open Sans", sans-serif;
+html { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
 }
 
 .diagram-container {
@@ -106,6 +108,5 @@ p code {
 
 .nav .title {
   border-bottom: none;
-  font-family: monospace;
   padding: 0.5em;
 }
