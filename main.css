@@ -14,6 +14,10 @@ html, body {
   text-align: center;
 }
 
+.diagram-container a {
+  border-bottom: none;
+}
+
 .diagram {
   filter: invert(var(--invert));
 }
@@ -43,6 +47,11 @@ html, body {
 .index {
   list-style-type: none;
   padding-inline: unset;
+}
+
+.index li {
+  border: thin var(--font-color) solid;
+  padding-left: 2em;
 }
 
 ul.toc {

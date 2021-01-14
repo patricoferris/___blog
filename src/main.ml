@@ -44,7 +44,7 @@ module Comps = struct
           (mk_text description) "</p></li>"]
     in
     let ol_list = List.map mk_item lst in
-    [%html "<ul>" ol_list "</ul>"]
+    [%html "<section><h2>Reading</h2><ul>" ol_list "</ul></section>"]
 
   let html ?(lang = "en") ?(css = "/main.css") ~title ~description ~body =
   [%html {| 
@@ -95,9 +95,7 @@ module PostCollection = struct
                       Comps.title t.meta.title;
                       Comps.date t.meta.date;
                       Tyxml.(Html.p [ Html.em [ Html.txt t.meta.description ] ]);
-                      Tyxml.Html.br ();
-                      Tyxml.Html.hr ();
-                      Tyxml.Html.br ();
+                      Tyxml.Html.(hr ());
                     ];
                  html_toc;
                  Tyxml.Html.Unsafe.data
@@ -118,7 +116,11 @@ module PostCollection = struct
           let path = Filename.chop_extension t.path ^ ".html" in
           [%html
             "<li><p><a href=" ("/" ^ path) ">"
-              [ Html.txt t.meta.title; Html.txt " -- "; Html.txt t.meta.date ]
+              [
+                Html.txt t.meta.title;
+                Html.txt " -- ";
+                Html.(em [ txt t.meta.date ]);
+              ]
               "</a></p><p>"
               [ Html.em [ Html.txt t.meta.description ] ]
               "</p></li>"])
